@@ -14,7 +14,7 @@ class Scoreboard:
 
         except FileNotFoundError:
             print("ERROR: File not found")
-            data: dict = {}
+            data: dict = {"guset": 0}
             with open(self.file_name, 'w') as file:
                   dump(data, file)
             print("INFO: File created")
@@ -43,7 +43,6 @@ class Scoreboard:
         try:
             with open(self.file_name, "w") as file:
                 dump(data, file)
-                file.close
             return True
 
         except Exception as e:
@@ -53,10 +52,3 @@ class Scoreboard:
     def update_record(self, new_score: int) -> None:
         if new_score > self.get_score():
             self.update_score(new_score=new_score)
-
-
-
-sb = Scoreboard(player_name="pluto", file_name="scoreboard.json")
-print(sb.get_score())
-print(sb.update_score(900))
-print(sb.get_score())
